@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JeetBuzz · নাইট রাইডার্স পার্টনার</title>
+    <!-- ফন্ট ওয়ানসাম (আইকনের জন্য) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #0b0e14;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .landing-card {
+            max-width: 1200px;
+            width: 100%;
+            background: #10131c;
+            border-radius: 40px;
+            padding: 32px 28px;
+            box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 215, 0, 0.1);
+            border: 1px solid #2f2b1f;
+        }
+
+        /* হেডার অংশ : লোগো + লগইন/সাইনআপ */
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-main {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #f9e281, #ffb347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 10px #ff990055;
+        }
+        .brand-tag {
+            background: #2a2f3c;
+            padding: 6px 14px;
+            border-radius: 60px;
+            color: #cfb87c;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border: 1px solid #504828;
+            white-space: nowrap;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .auth-link {
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding: 12px 32px;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            display: inline-block;
+            border: 1px solid transparent;
+        }
+
+        .login-btn {
+            background: transparent;
+            color: #e4d5ac;
+            border: 1px solid #665c3c;
+        }
+        .login-btn:hover {
+            border-color: #f3c26b;
+            color: #ffd966;
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .signup-btn {
+            background: linear-gradient(145deg, #f3b73e, #dc8c13);
+            color: #0b0e14;
+            box-shadow: 0 8px 18px #b87e1a33;
+            font-weight: 700;
+        }
+        .signup-btn:hover {
+            background: linear-gradient(145deg, #ffc85c, #e59e2b);
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px #b87e1a66;
+        }
+
+        /* নাইট রাইডার্স ব্যাজ */
+        .partner-badge {
+            background: #1e212a;
+            border-radius: 100px;
+            padding: 14px 24px;
+            margin: 10px 0 30px 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px solid #41473b;
+            font-size: 1.1rem;
+            color: #d6cdb2;
+            width: fit-content;
+        }
+        .partner-badge i {
+            color: #fdbb34;
+            font-size: 1.6rem;
+        }
+        .knight-text {
+            font-weight: 500;
+        }
+        .knight-text strong {
+            color: #fdd37b;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* মূল ক্যাটাগরি আইকন মেনু (জিম প্রাহক, এজুক্রিশড, ইত্যাদি) */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px 42px;
+            margin: 40px 0 30px 0;
+            padding: 15px 0;
+            border-top: 1px solid #2c302b;
+            border-bottom: 1px solid #2c302b;
+            justify-content: space-around;
+        }
+
+        .cat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #bfb58c;
+            font-weight: 500;
+            font-size: 0.9rem;
+            gap: 8px;
+            opacity: 0.9;
+            transition: 0.2s;
+        }
+        .cat-item i {
+            font-size: 1.8rem;
+            color: #ffcd7e;
+            filter: drop-shadow(0 2px 4px #6b4f1e);
+        }
+        .cat-item span {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* গেম গ্রিড –  */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin: 40px 0 20px;
+        }
+
+        .game-tile {
+            background: #1a1d28;
+            border-radius: 28px;
+            padding: 20px 12px 16px 12px;
+            text-align: center;
+            border: 1px solid #363522;
+            box-shadow: 0 10px 15px -8px #00000080;
+            transition: all 0.15s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .game-tile:hover {
+            border-color: #b69441;
+            background: #212534;
+            transform: translateY(-3px);
+        }
+
+        .game-icon {
+            font-size: 2.8rem;
+            filter: drop-shadow(0 6px 8px #ca9622);
+            margin-bottom: 4px;
+        }
+        .game-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: linear-gradient(180deg, #f5d97b, #dba550);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+        .game-provider {
+            font-size: 0.7rem;
+            color: #8d8f7c;
+            background: #252b30;
+            padding: 4px 12px;
+            border-radius: 40px;
+            display: inline-block;
+            margin-top: 4px;
+            border: 1px solid #4b4634;
+            white-space: nowrap;
+        }
+        .game-badge {
+            font-weight: 700;
+            font-size: 1rem;
+            background: #262d34;
+            padding: 5px 15px;
+            border-radius: 40px;
+            color: #e6c27a;
+            border: 1px solid #5b4d2b;
+            width: fit-content;
+            margin-top: 6px;
+        }
+        .jul-badge {
+            background: #1a3a42;
+            color: #7fe0e6;
+            border-color: #1f9fb0;
+            font-size: 0.8rem;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .flex-row {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .more-link {
+            text-align: right;
+            margin-top: 20px;
+            color: #be9f5a;
+            font-weight: 600;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            border-bottom: 2px dotted #705c34;
+            padding-bottom: 5px;
+            display: inline-block;
+            width: auto;
+        }
+        .more-link i {
+            margin-left: 10px;
+        }
+
+        /* ফুটার (ছবির শেষে More) এর আগের মত */
+        .spacer {
+            margin-top: 20px;
+        }
+
+        /* রেসপনসিভ */
+        @media (max-width: 700px) {
+            .landing-card { padding: 20px; }
+            .brand-main { font-size: 1.8rem; }
+            .auth-link { padding: 8px 20px; font-size: 1rem; }
+            .categories { gap: 20px; }
+        }
+
+        /* বিশেষ কিছু ডিজাইন যেমন "AVIATOR SPRIBE JUL" সরাসরি তুলতে চেষ্টা */
+        .inline-meta {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 5px;
+            margin: 6px 0 2px;
+            font-size: 0.75rem;
+            color: #9a9f99;
+        }
+        .game-tile .small-logo {
+            font-weight: 700;
+            color: #dbb86b;
+        }
+        .divider-dot {
+            color: #4f543e;
+        }
+        .jul-tag {
+            background: #1e4a54;
+            padding: 2px 10px;
+            border-radius: 30px;
+            color: #acf0ff;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-card">
+
+        <!-- শীর্ষ: লোগো + লগইন/সাইনআপ  -->
+        <div class="header-row">
+            <div class="brand">
+                <span class="brand-main">JeetBuzz</span>
+                <span class="brand-tag"><i class="fas fa-crown" style="color: #f5b342;"></i> এক্সক্লুসিভ</span>
+            </div>
+            <div class="auth-buttons">
+                <!-- লগইন ও সাইনআপ লিংকে প্রদত্ত url যোগ করা হয়েছে (join পেইজ) -->
+                <a href="http://jzb1203.live/af/ktcw795J/join" class="auth-link login-btn" target="_blank" rel="noopener noreferrer">লগইন</a>
+                <a href="http://jzb1203.live/af/ktcw795J/join" class="auth-link signup-btn" target="_blank" rel="noopener noreferrer">সাইন আপ <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+            </div>
+        </div>
+
+        <!-- অফিসিয়াল ক্যাম্পোর্টের পার্টনার (KNIGHT RIDERS) -->
+        <div class="partner-badge">
+            <i class="fas fa-shield-alt"></i>
+            <span class="knight-text">আমরা <strong>KNIGHT RIDERS</strong>-এর অফিসিয়াল ক্যাম্পোর্টের পার্টনার</span>
+            <i class="fas fa-chevron-right" style="color: #fdbb34; font-size: 1rem;"></i>
+        </div>
+
+        <!-- জিম প্রাহক / এজুক্রিশড / স্পোর্ট / ক্যাশিনেলা / স্কট  (ছবির মত) -->
+        <div class="categories">
+            <div class="cat-item"><i class="fas fa-dumbbell"></i><span>জিম প্রাহক</span></div>
+            <div class="cat-item"><i class="fas fa-dragon"></i><span>এজুক্রিশড</span></div>
+            <div class="cat-item"><i class="fas fa-futbol"></i><span>স্পোর্ট</span></div>
+            <div class="cat-item"><i class="fas fa-coins"></i><span>ক্যাশিনেলা</span></div>
+            <div class="cat-item"><i class="fas fa-hat-wizard"></i><span>স্কট</span></div>
+        </div>
+
+        <!-- গেম টাইলস গ্রিড — ছবির AVIATOR, SUPER ACE, AZTEC GEMS ইত্যাদি  -->
+        <div class="games-grid">
+            
+            <!-- AVIATOR card -->
+            <div class="game-tile">
+                <div class="game-icon">🛩️</div>
+                <div class="game-title">AVIATOR</div>
+                <div class="inline-meta">
+                    <span class="small-logo">SPRIBE</span>
+                    <span class="divider-dot">•</span>
+                    <span class="jul-tag">JUL</span>
+                </div>
+            </div>
+
+            <!-- SUPER ACE -->
+            <div class="game-tile">
+                <div class="game-icon">🃏</div>
+                <div class="game-title">SUPER ACE</div>
+                <div class="inline-meta">
+                    <span class="small-logo">JUL</span>
+                </div>
+                <span class="jul-badge">♠️ ACE</span>
+            </div>
+
+            <!-- AZTEC GEMS -->
+            <div class="game-tile">
+                <div class="game-icon">💎</div>
+                <div class="game-title">AZTEC GEMS</div>
+                <div class="inline-meta">
+                    <span>PRAGMATIC PLAY</span>
+                    <span class="divider-dot">•</span>
+                    <span class="jul-tag">JUL</span>
+                </div>
+            </div>
+
+            <!-- FORTUNE GUARDA + 500 JUL -->
+            <div class="game-tile">
+                <div class="game-icon">🛡️</div>
+                <div class="game-title">FORTUNE GUARDA</div>
+                <div class="flex-row">
+                    <span class="game-badge">500</span>
+                    <span class="jul-tag">JUL</span>
+                </div>
+            </div>
+
+            <!-- WIZARD | Super Tiger | YELLOW BAT  (একসাথে মাল্টিপল) -->
+            <div class="game-tile">
+                <div class="game-icon">🧙</div>
+                <div class="game-title">WIZARD</div>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; font-size: 0.8rem; margin: 6px 0;">
+                    <span style="background:#2f3542; padding:4px 10px; border-radius: 20px; color: #bda45e;">Super Tiger</span>
+                    <span style="background:#2f3542; padding:4px 10px; border-radius: 20px; color: #ead379;">YELLOW BAT</span>
+                </div>
+                <span class="jul-badge">⚡ জুল</span>
+            </div>
+
+            <!-- ZOOM + 500 JUL -->
+            <div class="game-tile">
+                <div class="game-icon">🔍</div>
+                <div class="game-title">ZOOM</div>
+                <div class="flex-row">
+                    <span class="game-badge">500</span>
+                    <span class="jul-tag">JUL</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- More (আরও) লিঙ্ক / ছবিতে যেমন ছিল -->
+        <div class="more-link">
+            More <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <!-- ছোট ফুটার নোট: ছবির মত কিছু বাড়তি (জুল স্পিরিট) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; border-top: 1px dashed #373d35; padding-top: 20px; color: #6c775e; font-size: 0.9rem;">
+            <span><i class="fas fa-gamepad" style="color: #b59747;"></i> 500 JUL বোনাস শীঘ্রই</span>
+            <span>⚡ অফিসিয়াল নাইট রাইডার্স পেজ</span>
+        </div>
+
+        <!-- স্বচ্ছতা: লগইন/সাইনআপ বাটন গিয়ে join পেইজে যাবে -->
+        <div style="text-align: center; margin-top: 25px; font-size: 0.75rem; color: #4b503f;">
+            <i class="fas fa-lock" style="color: #7c8849;"></i> লগইন বা সাইন আপ করতে jzb1203.live/af/ktcw795J/join 
+        </div>
+    </div>
+
+    <!-- নিশ্চিত করা: সবগুলো বাটন একই লিংক ব্যবহার করছে -->
+    <div style="display: none;">একীভূত লিংক: http://jzb1203.live/af/ktcw795J/join</div>
+</body>
+</html>
